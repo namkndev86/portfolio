@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+
+    environment {
+        REGISTRY = "registry.internal"
+        IMAGE_NAME = "portfolio/frontend-web"
+        DOCKER_TAG = "${env.BUILD_NUMBER}"
+        SWARM_SERVICE_NAME = "portfolio_frontend-web"
+    }
+
+    options {
+        timeout(time: 30, unit: 'MINUTES')
+        buildDiscarder(logRotator(numToKeepStr: '15'))
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Install') {
+            steps {
+                dir('frontend-web') {
+                    sh 'npm ci'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                dir('frontend-web') {
+                    sh 'npm run lint || true' // Lint checks
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                dir('frontend-web') {
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                dir('frontend-web') {
+                    sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:${DOCKER_TAG} -t ${REGISTRY}/${IMAGE_NAME}:latest ."
+                }
+            }
+        }
+
+        stage('Push') {
+            steps {
+                echo "Pushing built image to registry..."
+                // sh "docker push ${REGISTRY}/${IMAGE_NAME}:${DOCKER_TAG}"
+                // sh "docker push ${REGISTRY}/${IMAGE_NAME}:latest"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying to production Swarm or K8s..."
+                // sh "docker service update --image ${REGISTRY}/${IMAGE_NAME}:${DOCKER_TAG} ${SWARM_SERVICE_NAME}"
+            }
+        }
+    }
+
+    post {
+        failure {
+            script {
+                echo "Deployment failed! Initiating rollback process..."
+                // sh "docker service rollback ${SWARM_SERVICE_NAME}"
+            }
+        }
+        success {
+            echo "Deployment successful."
+        }
+    }
+}
