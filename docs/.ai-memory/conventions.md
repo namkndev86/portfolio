@@ -1,8 +1,9 @@
-# Documentation Workspace Memory
+# Documentation Conventions
 
-## Responsibility
-This workspace maintains all user-facing onboarding details, architecture specifications, API documentation, runbooks, and design decisions.
+This document establishes writing standards and Markdown layout rules for platform manuals under `docs/`.
 
-## Conventions
-* Ensure all files are written in standard markdown format.
-* Update `docs/adr/index.md` whenever new decisions are appended in the root `.ai-memory/decisions.md`.
+## Writing & Formatting Guidelines
+* Use standard Markdown and GitHub Flavored Markdown (GFM).
+* Use GitHub alerts (`> [!NOTE]`, `> [!IMPORTANT]`, `> [!WARNING]`) for critical operational instructions.
+* Use Mermaid syntax for sequence and architecture diagrams.
+* Keep file links relative or standard markdown links (`[text](file:///path)`).
