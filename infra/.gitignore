@@ -1,0 +1,13 @@
+# Ignore local environment files
+.env
+*.env
+docker/.env
+
+# Ignore database dumps/backups
+*.sql
+*.tar
+*.gz
+*.zip
+*.dump
+scripts/*.sql
+scripts/*.dump
