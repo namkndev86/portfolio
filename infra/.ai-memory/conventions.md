@@ -1,8 +1,12 @@
-# Infrastructure Workspace Memory
+# Infrastructure Conventions
 
-## Responsibility
-This workspace maintains all configurations related to Nginx routing, Docker container virtualization, Prometheus/Grafana metrics monitoring, and Jenkins CI/CD files.
+This document establishes DevOps standards and conventions for Docker, Nginx, and monitoring configs.
 
-## Conventions
-* Hardcoded credentials inside docker-compose files or configuration blocks are strictly prohibited. Always inject parameters using environment variables (`.env`).
-* Container network aliases must be clearly mapped: `postgres-db`, `mongodb-db`, `redis-cache`, `backend-api`, `frontend-web`.
+## Nginx Conventions
+* Config files must be modularized under `infra/nginx/conf.d/`.
+* Upstream server declarations must use Docker service names (`frontend-web`, `backend-api`).
+
+## Docker & Compose Conventions
+* Always use official minimal base images (`node:20-alpine`, `postgres:16-alpine`, `redis:7-alpine`).
+* Never run application containers as `root`.
+* Health checks (`healthcheck`) must be declared for all database and service dependencies in `docker-compose.yml`.
