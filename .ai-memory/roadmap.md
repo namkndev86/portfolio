@@ -1,45 +1,53 @@
 # Platform Roadmap
 
-This document outlines the phased roadmap for building and deploying the Portfolio Platform.
+This document outlines the phased roadmap for building, expanding, and deploying the Personal Developer Platform.
 
 ---
 
-## Phase 1: Scaffolding & Project Memory (Current)
-* [x] Define platform topology and multi-tier structure in `architecture.md`.
-* [x] Align non-functional requirements and quality levels in `requirements.md`.
-* [x] Log initial architecture decisions (ADR-001, ADR-002, ADR-003) in `decisions.md`.
-* [x] Set style, naming, and linting guidelines in `conventions.md`.
-* [x] Draft initial core feature requirements under `.ai-memory/features/`.
+## Phase 1 — Portfolio Platform (IN PROGRESS - Multi-Service Sync)
 
-## Phase 2: DevOps, Proxies & Monitoring Setup
-* [ ] Configure **Nginx** gateway configurations to route static and dynamic routes.
-* [ ] Write **Docker Compose** configurations representing PostgreSQL, MongoDB, Redis, Prometheus, Grafana, frontend, and backend nodes.
-* [ ] Configure **Prometheus** scraper rules and **Grafana** dashboard provisions to monitor CPU/Memory, HTTP request rates, and latencies.
-* [ ] Draft script files for quick bootstrapping, seed injection, and backup routines.
+### Service Status Matrix
+| Service | Status | Remaining Tasks |
+| :--- | :--- | :--- |
+| **`frontend-web`** | 🟢 UI Implemented | Connect client query hooks to live backend API endpoints (`NEXT_PUBLIC_API_URL`). |
+| **`backend-api`** | 🟡 Pending Implementation | Implement NestJS modules (`projects`, `profile`, `experience`, `contact`), Prisma schema alignment, and seed script. |
+| **`infra`** | 🟡 Pending Synchronization | Synchronize Nginx proxy routing (`/api/v1/*` & `/*`), Docker Compose orchestration, and health checks. |
+| **`docs`** | 🟡 Pending Documentation | Document Phase 1 OpenAPI specs, architecture sequence diagrams, and local onboarding runbooks. |
 
-## Phase 3: NestJS Backend API Build
-* [ ] Initialize the NestJS framework with strict TypeScript compilation.
-* [ ] Generate Prisma configurations and schema tables for Postgres storage.
-* [ ] Connect Mongoose schemas to MongoDB for analytics ingestion and logging.
-* [ ] Build API modules:
-  * **Auth**: Admin access, JWT creation, password hashing, and Redis-backed session revoking.
-  * **Projects**: Relational queries, search, tags.
-  * **Blog**: Document store integration for text parsing, drafts, and categories.
-  * **Analytics**: Endpoint for telemetry, caching, and batch write actions.
-* [ ] Integrate OpenAPI (Swagger) documents with automatic endpoint descriptions.
-* [ ] Write unit and integration test blocks verifying databases.
+### Detailed Phase 1 Task Checklist
+- [x] **Frontend Web**: Feature modular structure, UI views (`/`, `/about`, `/projects`, `/projects/[slug]`, `/experience`, `/resume`, `/contact`), Zod validation, Framer Motion animations.
+- [ ] **Backend API**: Prisma schema alignment, NestJS modules (`ProjectsModule`, `ProfileModule`, `ExperienceModule`, `ContactModule`), REST controllers (`/api/v1/...`), database seed script (`prisma/seed.ts`).
+- [ ] **Infra**: Nginx reverse proxy routing (`conf.d/default.conf`), Docker Compose multi-service build config, container healthchecks.
+- [ ] **Docs**: OpenAPI specs in `docs/api/endpoints.md`, system sequence diagrams in `docs/architecture/system_design.md`, local setup runbook in `docs/onboarding/local_setup.md`.
 
-## Phase 4: Next.js Frontend Development
-* [ ] Initialize Next.js 15 App Router codebase.
-* [ ] Establish the design system using vanilla tailwind configurations derived from the requirement specifications.
-* [ ] Integrate **React Three Fiber (R3F)** for interactive 3D panels, dynamic particle engines, and model rendering.
-* [ ] Create layout modules:
-  * Zustand stores for client states.
-  * React Query hooks for fetching dynamic posts and showcase objects.
-  * Responsive and animated pages (Framer Motion).
-* [ ] Audit against Web Vitals targets (> 90 scores on mobile and desktop).
+---
 
-## Phase 5: CI/CD & Deployments
-* [ ] Write isolated Jenkinsfiles for frontend and backend pipelines.
-* [ ] Implement Docker build caching, image registry tags, and zero-downtime deployment triggers.
-* [ ] Create rolling updates and rollback scripts.
+## Phase 2 — Technical Blog (Future)
+- [ ] Routes: `/blog`, `/blog/[slug]`.
+- [ ] MDX article compiler with custom code block syntax highlighting.
+- [ ] MongoDB document storage for blog posts and tag telemetry.
+- [ ] Incremental Static Regeneration (ISR) for fast content updates.
+
+---
+
+## Phase 3 — Learning Resources (Future)
+- [ ] Routes: `/resources`, `/resources/[slug]`.
+- [ ] Developer roadmaps, cheat sheets, and technical guides.
+
+---
+
+## Phase 4 — Courses & Workshops (Future)
+- [ ] Routes: `/courses`, `/courses/[slug]`.
+- [ ] Course catalog, structured lesson views, and video player support.
+
+---
+
+## Phase 5 — Interactive Labs & Experiments (Future)
+- [ ] Routes: `/labs`, `/labs/[slug]`.
+- [ ] Interactive WebGL / Three.js 3D demos and particle playgrounds.
+
+---
+
+## Phase 6 — Admin CMS & Telemetry (Future)
+- [ ] Routes: `/admin`, `/admin/projects`, `/admin/posts`, `/admin/courses`.
+- [ ] Content management dashboards for CRUD operations on portfolio assets, blog posts, and courses.

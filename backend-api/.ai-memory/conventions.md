@@ -1,11 +1,17 @@
-# Backend API Workspace Memory
+# Backend Development Conventions
 
-## Responsibility
-Develop, test, and expose high-throughput REST endpoints, handle authorization tokens, perform transactional PostgreSQL operations, write logs to MongoDB, and cache objects on Redis.
+This document establishes development standards and conventions specific to `backend-api`.
 
-## Backend Architecture Conventions
-* **Controller Isolation**: Keep routes and DTO bindings in the controller level. No direct DB references in controllers.
-* **Service Patterns**: Services implement the core business rules. Expose interfaces when writing adapters for external integrations.
-* **Prisma & Postgres**: Schema migrations must be ran before container launch. Use transaction operations where modifications hit multi-tables.
-* **MongoDB & Mongoose**: Map schemas to strict interfaces and export models through dedicated modules.
-* **Exception Filters**: Custom exceptions must be mapped to corporate error structures (defined in `docs/api/endpoints.md`).
+## Module & File Conventions
+* **Structure**: Feature modules reside under `src/modules/<feature>/`.
+* **Naming**:
+  * Controllers: `name.controller.ts` (`NameController`)
+  * Services: `name.service.ts` (`NameService`)
+  * Modules: `name.module.ts` (`NameModule`)
+  * DTOs: `create-name.dto.ts`, `update-name.dto.ts`
+* **Route Prefixes**: All controllers must use `@Controller('feature')` under the global `/api/v1/` prefix.
+
+## Database & ORM Conventions
+* **Prisma**: All database queries must go through `PrismaService`. Never construct raw SQL unless performing complex analytical migrations.
+* **Migrations**: Every schema change in `prisma/schema.prisma` must be committed with an explicit migration name via `npx prisma migrate dev --name <description>`.
+* **Seeding**: Initial development datasets must be maintained in `prisma/seed.ts`.
