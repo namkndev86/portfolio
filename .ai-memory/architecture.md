@@ -30,9 +30,15 @@ graph TD
   * External: `80` (HTTP), `443` (HTTPS)
   * Internal upstream routing: `3000` (Next.js), `5000` (NestJS)
 
-### 2. Frontend (Next.js 15 + React 19)
-* **Responsibility**: UI layer, static/dynamic site generation, interactive 3D elements (Three.js/R3F), state management (Zustand), client-side queries (React Query).
+### 2. Frontend Application (Next.js 15 App Router + React 19)
+* **Responsibility**: UI layer, static/dynamic site generation (SSG/ISR), interactive canvas elements, client state management (Zustand), and feature-sliced module architecture.
 * **Environment**: Runs node server on port `3000` internally.
+* **Module Architecture**:
+  * `src/app/`: App Router route pages (`/`, `/about`, `/projects`, `/projects/[slug]`, `/experience`, `/resume`, `/contact`).
+  * `src/features/`: Domain-driven feature packages (`portfolio`, `projects`, `about`, `experience`, `resume`, `contact`, plus future-ready `blog`, `resources`, `courses`, `labs`, `admin`).
+  * `src/components/`: Reusable UI primitives (`ui/`) and common layouts (`common/`).
+  * `src/store/`: Zustand stores (`useUIStore.ts`).
+  * `src/types/` & `src/data/`: Strongly typed entity schemas and mock datasets.
 
 ### 3. Backend API (NestJS)
 * **Responsibility**: REST endpoints, business logic, analytics ingestion, authentication, database migrations.

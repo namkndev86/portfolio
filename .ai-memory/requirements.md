@@ -1,52 +1,36 @@
 # Platform Requirements
 
-This document outlines the functional, non-functional, and operational requirements for the enterprise Portfolio Platform.
+This document outlines the functional, non-functional, and operational requirements for the enterprise Personal Developer Platform.
 
-## Core Functional Requirements
+## Product Vision & Multi-Service Phase Execution Rule
 
-### 1. Authentication & Security
-* Multi-factor/JWT-based authentication for site administrators.
-* Redis-backed session invalidation and rate limiting to prevent brute force attacks.
-* Role-based access control (Admin, Editor, Guest).
+A phase is considered complete **only when all affected services are completed** (`frontend-web`, `backend-api`, `infra`, `docs`). Each phase must be synchronized across all services.
 
-### 2. Portfolio & Dynamic Biography
-* Interactive biography timelines with rich visual components.
-* Dynamically fetched skills hierarchy, categorized by proficiency and domain.
-
-### 3. Projects Showcase
-* Detailed case studies with image galleries, technological tags, github integrations, and live links.
-* Filtering, search, and categorization using Postgres relational indices.
-
-### 4. Blog Engine
-* MDX/Rich Text blogging engine supporting draft status, publishing schedules, categorization, tags, and reading-time estimations.
-* Fast page delivery utilizing incremental static regeneration (ISR) in Next.js.
-
-### 5. Ingest Analytics
-* Event tracking for page views, project clicks, and interactive R3F canvas events.
-* Low-latency client ingestion API.
-* Log storage in MongoDB to support unstructured event payloads.
-
-### 6. Interactive Contact Forms
-* Secure validation, spam detection (reCAPTCHA v3 / Cloudflare Turnstile integration readiness).
-* Real-time notifications of contacts sent via webhooks (e.g. Slack/Discord) or transactional emails.
+### Phase Multi-Service Roadmap Scope
+- **Phase 1 — Portfolio (IN PROGRESS)**:
+  - `frontend-web`: Complete UI views (`/`, `/about`, `/projects`, `/projects/[slug]`, `/experience`, `/resume`, `/contact`).
+  - `backend-api`: REST endpoints (`/api/v1/projects`, `/api/v1/profile`, `/api/v1/experience`, `/api/v1/contact`), Prisma schema alignment, seed script.
+  - `infra`: Nginx proxy routing (`/api/v1/*` -> backend, `/*` -> frontend), Docker Compose orchestration.
+  - `docs`: OpenAPI specifications, architecture sequence diagrams, onboarding guides.
+- **Phase 2 — Technical Blog (Future)**: MDX, categories, tags, search, syntax highlighting across services.
+- **Phase 3 — Learning Resources (Future)**: Roadmaps, cheat sheets, guides, downloadable assets.
+- **Phase 4 — Courses (Future)**: Course catalog, structured lessons, progress tracking.
+- **Phase 5 — Interactive Labs (Future)**: WebSockets, performance benchmarks, Three.js experiments.
+- **Phase 6 — Admin CMS (Future)**: Content management, media pipeline, analytics dashboards.
 
 ---
 
 ## Quality and Scaling Requirements (Enterprise Standard)
 
 ### 1. Developer Scale (50+ Engineers)
-* **Code Isolation**: Distinct service codebases (`frontend-web` and `backend-api`) so that frontend developers do not need to configure backend runtimes, and vice-versa.
+* **Code Isolation**: Distinct service codebases (`frontend-web` and `backend-api`) and service memory directories (`frontend-web/.ai-memory`, `backend-api/.ai-memory`, `infra/.ai-memory`, `docs/.ai-memory`).
 * **Typing Rigor**: Strict TypeScript compilation configuration (`strict: true`). No implicit `any`.
 * **CI/CD Independence**: Changes to frontend code only trigger the frontend pipeline; backend edits only run backend tests and deployments.
 
-### 2. Operational Scale (Millions of Requests)
-* **High Availability**: All stateless backend services must support horizontal scaling with active-active routing.
-* **Caches**: Redis caches p95 read paths for projects and blog listings. Cache eviction strategies must prevent stale content.
-* **Database Performance**:
-  * PostgreSQL: Proper indexes on query search paths (`slug`, `category`, `published_at`).
-  * MongoDB: Shard-key ready schemas with indexes on analytics `timestamp` and `event_type`.
+### 2. Operational Scale & Performance
+* **High Availability**: Decoupled microservices architecture sitting behind Nginx reverse proxy.
+* **Fast Load Times**: SSG/ISR pre-rendering on frontend with Redis caching on backend API endpoints.
 
 ### 3. Maintenance Scale (5+ Years)
-* **Decoupled Architecture**: No tight coupling between databases and endpoints. Abstract database implementations using Repository patterns.
-* **Strict ADR Log**: Every technical pivot must be logged using Architectural Decision Records (ADRs) to allow future developers to reconstruct reasoning.
-* **High Test Coverage**: Unit tests must cover > 80% of business logic files. Integration tests run on every Pull Request.
+* **Strict Memory Ownership**: Service memory directories track domain architecture and decisions.
+* **Strict ADR Log**: Architectural Decision Records (ADRs) tracking structural choices per service.

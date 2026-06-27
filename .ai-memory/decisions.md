@@ -1,6 +1,6 @@
 # Architectural Decisions
 
-This document acts as the official Architectural Decision Record (ADR) registry for the Portfolio Platform.
+This document acts as the official Architectural Decision Record (ADR) registry for platform-wide cross-service decisions. Service-specific ADRs are located within their respective service memory directories (`frontend-web/.ai-memory/decisions.md`, `backend-api/.ai-memory/decisions.md`).
 
 ---
 
