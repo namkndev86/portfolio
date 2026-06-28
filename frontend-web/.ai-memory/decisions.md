@@ -124,3 +124,21 @@ We adopt **TanStack React Query v5** (`src/core/query/`) with a strongly typed Q
 ### Consequences
 * Predictable data fetching, optimistic updates, and clean cache invalidation strategies.
 
+---
+
+# ADR-013: Integration of shadcn@latest CLI for UI Components
+
+### Status
+Accepted
+
+### Context
+Standardizing modern UI component generation and maintenance across the application using shadcn design primitives and automated component distribution.
+
+### Decision
+We initialized `shadcn@latest` CLI (`components.json`) configured with CSS custom properties (`cssVariables: true`), base-nova styling, and Lucide icon library support mapped to `@/components/ui` primitives.
+
+### Consequences
+* Developers can now add production-grade UI components using `npx shadcn@latest add <component>`.
+* Preserves theme custom properties while extending component capabilities seamlessly.
+
+
