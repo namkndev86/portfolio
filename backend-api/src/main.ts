@@ -1,7 +1,9 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { createValidationPipe } from './core/pipes/validation.pipe';
+import { LoggingInterceptor } from './core/logging/logging.interceptor';
+import { AuditLogInterceptor } from './core/audit/audit.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,13 +18,12 @@ async function bootstrap() {
   });
 
   // Configure Validation Pipeline
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-    }),
-  );
+  app.useGlobalPipes(createValidationPipe());
+
+  // Bind Global Interceptors
+  const loggingInterceptor = app.get(LoggingInterceptor);
+  const auditInterceptor = app.get(AuditLogInterceptor);
+  app.useGlobalInterceptors(loggingInterceptor, auditInterceptor);
 
   // Setup OpenAPI Swagger Specs
   const config = new DocumentBuilder()

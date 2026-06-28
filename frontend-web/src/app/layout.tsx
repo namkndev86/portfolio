@@ -1,12 +1,39 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import React from "react";
+import type { Metadata } from 'next';
+import './globals.css';
+import React from 'react';
+import { Navbar } from '@/components/common/Navbar';
+import { Footer } from '@/components/common/Footer';
+import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: "Portfolio Platform | Enterprise Showcase",
-  description: "A production-grade, highly scalable developer Portfolio Platform sits behind Nginx and NestJS.",
-  keywords: ["NestJS", "Next.js", "React Three Fiber", "Docker", "DevOps"],
+  title: `${SITE_CONFIG.name} | ${SITE_CONFIG.role}`,
+  description: SITE_CONFIG.bio,
+  keywords: [
+    'Software Architect',
+    'Fullstack Engineer',
+    'Next.js',
+    'TypeScript',
+    'Microservices',
+    'React',
+  ],
+  authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+  icons: {
+    icon: '/icon.svg',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: SITE_CONFIG.url,
+    title: `${SITE_CONFIG.name} | ${SITE_CONFIG.role}`,
+    description: SITE_CONFIG.bio,
+    siteName: SITE_CONFIG.name,
+  },
 };
+
+import { ThemeProvider } from '@/core/theme/theme-provider';
+import { AuthProvider } from '@/core/auth/auth-context';
+import { I18nProvider } from '@/core/i18n/i18n-context';
+import { PlatformQueryProvider } from '@/core/query/query-provider';
 
 export default function RootLayout({
   children,
@@ -14,9 +41,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased bg-background-primary text-text-main">
-        {children}
+    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+      <body
+        className="antialiased bg-[#0b0f19] text-slate-100 flex flex-col min-h-screen"
+        suppressHydrationWarning
+      >
+        <PlatformQueryProvider>
+          <ThemeProvider>
+            <I18nProvider>
+              <AuthProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </AuthProvider>
+            </I18nProvider>
+          </ThemeProvider>
+        </PlatformQueryProvider>
       </body>
     </html>
   );
