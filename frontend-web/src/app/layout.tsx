@@ -41,9 +41,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className="antialiased bg-[#0b0f19] text-slate-100 flex flex-col min-h-screen"
+        className="antialiased bg-background text-foreground flex flex-col min-h-screen transition-colors duration-300"
         suppressHydrationWarning
       >
         <PlatformQueryProvider>

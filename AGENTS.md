@@ -411,3 +411,14 @@ Frontend must generate consumers from contracts.
 Backend must generate DTOs and endpoints from contracts.
 
 Neither frontend nor backend may introduce API changes without updating contracts first.
+
+When the user requests an implementation, refactor, migration, optimization, or feature development:
+
+- Do not stop at analysis or recommendations.
+- Do not provide example code unless explicitly requested.
+- Directly modify the project files.
+- Treat the repository as editable.
+- Produce actual file changes.
+- Update related documentation and memory files.
+- Continue until the implementation is complete.
+- Only ask for clarification when a requirement is ambiguous or technically impossible.
