@@ -280,3 +280,62 @@ Status = READY FOR VERIFICATION
 Only after successful verification:
 
 Status = PHASE COMPLETED
+
+# Phase-First Development Rule
+
+The project is developed in phases.
+
+Current phase:
+Phase 1 - Foundation Architecture
+
+Before implementing any feature:
+
+1. Read all files inside .ai-memory/
+2. Determine the current project phase
+3. Follow the scope of the current phase only
+4. Do not implement future phase features
+5. Propose architecture before implementation
+6. Update project memory after each completed task
+
+During Phase 1:
+
+Allowed:
+
+- Project structure
+- Architecture design
+- Design system foundation
+- Shared components
+- API layer
+- State management
+- Authentication framework
+- Authorization framework
+- Error handling
+- Logging
+- Configuration management
+- Infrastructure setup
+- CI/CD setup
+- Database foundation
+
+Forbidden:
+
+- Business modules
+- Project management module
+- Blog module
+- Course module
+- Contact module
+- Any domain-specific feature
+
+The goal of Phase 1 is to build a reusable enterprise-grade platform foundation.
+
+Phase Completion Rule
+
+A phase is not completed until:
+
+- Architecture is finalized
+- Folder structure is finalized
+- Coding conventions are finalized
+- Shared foundation is implemented
+- Documentation is updated
+- Memory files are updated
+
+Only after all requirements are satisfied may the project move to the next phase.
