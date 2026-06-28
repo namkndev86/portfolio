@@ -22,7 +22,7 @@ export function HeroSection() {
           <FadeIn direction="down">
             <div className="inline-flex items-center space-x-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-300 backdrop-blur-md mb-6">
               <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-              <span>{profile?.role || t('pages.heroTitle')}</span>
+              <span>{t('pages.heroTitle') || profile?.role}</span>
             </div>
           </FadeIn>
 
@@ -40,10 +40,10 @@ export function HeroSection() {
 
           <FadeIn delay={0.3} className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link
-              href="/projects"
+              href="/resume"
               className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3.5 text-base font-medium text-white shadow-xl shadow-indigo-500/25 hover:bg-indigo-700 active:scale-95 transition-all group"
             >
-              {t('navigation.projects')}
+              {t('navigation.resume')}
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link
