@@ -1,3 +1,5 @@
+import { AxiosRequestConfig } from 'axios';
+
 export interface ApiResponse<T = any> {
   success: boolean;
   data: T;
@@ -19,7 +21,17 @@ export interface ApiErrorPayload {
   timestamp: string;
 }
 
-export interface RequestOptions extends RequestInit {
-  params?: Record<string, string | number | boolean | undefined>;
+export interface CustomApiRequestConfig extends AxiosRequestConfig {
   requiresAuth?: boolean;
+  skipMaintenanceCheck?: boolean;
+}
+
+export interface FileUploadProgress {
+  loaded: number;
+  total: number;
+  percentage: number;
+}
+
+export interface FileUploadOptions extends CustomApiRequestConfig {
+  onProgress?: (progress: FileUploadProgress) => void;
 }
