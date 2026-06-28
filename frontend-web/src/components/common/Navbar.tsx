@@ -17,21 +17,25 @@ export function Navbar() {
       <Container>
         <div className="flex h-16 items-center justify-between">
           {/* Brand Logo */}
-          <Link 
-            href="/" 
-            onClick={closeMobileMenu} 
+          <Link
+            href="/"
+            onClick={closeMobileMenu}
             className="flex items-center space-x-2 text-white font-bold text-lg tracking-tight group"
           >
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600/20 border border-indigo-500/30 text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-all">
               <Terminal className="h-5 w-5" />
             </div>
-            <span>{SITE_CONFIG.name.split(' ')[0]}<span className="text-indigo-400">.dev</span></span>
+            <span>
+              {SITE_CONFIG.name.split(' ')[0]}
+              <span className="text-indigo-400">.dev</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+              const isActive =
+                pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
@@ -40,7 +44,7 @@ export function Navbar() {
                     'px-3 py-2 rounded-md text-sm font-medium transition-colors relative',
                     isActive
                       ? 'text-white bg-slate-800/80'
-                      : 'text-slate-400 hover:text-white hover:bg-slate-800/40'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-800/40',
                   )}
                 >
                   {link.name}
@@ -75,7 +79,8 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-slate-800 space-y-2 animate-in slide-in-from-top duration-200">
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+              const isActive =
+                pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
               return (
                 <Link
                   key={link.href}
@@ -85,7 +90,7 @@ export function Navbar() {
                     'block px-4 py-2.5 rounded-lg text-base font-medium transition-colors',
                     isActive
                       ? 'bg-indigo-600/15 text-indigo-400 font-semibold'
-                      : 'text-slate-300 hover:bg-slate-900 hover:text-white'
+                      : 'text-slate-300 hover:bg-slate-900 hover:text-white',
                   )}
                 >
                   {link.name}
