@@ -32,6 +32,8 @@ export const metadata: Metadata = {
 
 import { ThemeProvider } from '@/core/theme/theme-provider';
 import { AuthProvider } from '@/core/auth/auth-context';
+import { I18nProvider } from '@/core/i18n/i18n-context';
+import { PlatformQueryProvider } from '@/core/query/query-provider';
 
 export default function RootLayout({
   children,
@@ -44,13 +46,17 @@ export default function RootLayout({
         className="antialiased bg-[#0b0f19] text-slate-100 flex flex-col min-h-screen"
         suppressHydrationWarning
       >
-        <ThemeProvider>
-          <AuthProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </AuthProvider>
-        </ThemeProvider>
+        <PlatformQueryProvider>
+          <ThemeProvider>
+            <I18nProvider>
+              <AuthProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </AuthProvider>
+            </I18nProvider>
+          </ThemeProvider>
+        </PlatformQueryProvider>
       </body>
     </html>
   );
