@@ -28,3 +28,5 @@ export const MOCK_SKILLS: Skill[] = [
   { id: 'sk-16', name: 'Git & GitHub Workflows', category: 'Tools & Testing', iconName: 'GitCommit', proficiency: 96, featured: false },
   { id: 'sk-17', name: 'Jest, Playwright & Vitest', category: 'Tools & Testing', iconName: 'CheckCircle2', proficiency: 88, featured: false }
 ];
+
+export const SKILLS_DATA = MOCK_SKILLS;

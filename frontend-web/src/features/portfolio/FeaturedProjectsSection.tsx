@@ -1,25 +1,31 @@
+'use client';
+
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Container } from '@/components/common/Container';
 import { SectionHeader } from '@/components/common/SectionHeader';
 import { ProjectCard } from '@/features/projects/ProjectCard';
-import { MOCK_PROJECTS } from '@/data/projects';
 import { StaggerContainer, StaggerItem } from '@/components/animations/MotionComponents';
+import { useProjectsQuery } from '@/hooks/queries/useProjectsQuery';
+import { useTranslation } from '@/core/i18n/i18n-context';
+import { Project } from '@/types/project';
 
 export function FeaturedProjectsSection() {
-  const featuredProjects = MOCK_PROJECTS.filter((p) => p.featured);
+  const { data: projects = [] } = useProjectsQuery();
+  const { t } = useTranslation();
+  const featuredProjects = projects.filter((p: Project) => p.featured);
 
   return (
-    <section className="py-20 bg-slate-950">
+    <section className="py-20 bg-background text-foreground transition-colors">
       <Container>
         <SectionHeader
           badge="Selected Architecture"
-          title="Featured Engineering Projects"
-          subtitle="A showcase of mission-critical platforms, fullstack ecosystems, and core design systems built for scale."
+          title={t('pages.projectsTitle')}
+          subtitle="Mission-critical platforms, fullstack ecosystems, and core design systems built for scale."
         />
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          {featuredProjects.map((project) => (
+          {featuredProjects.map((project: Project) => (
             <StaggerItem key={project.id}>
               <ProjectCard project={project} />
             </StaggerItem>
@@ -31,7 +37,7 @@ export function FeaturedProjectsSection() {
             href="/projects"
             className="inline-flex items-center space-x-2 text-indigo-400 font-semibold hover:text-indigo-300 transition-colors group"
           >
-            <span>View All Projects & System Architectures</span>
+            <span>{t('navigation.projects')}</span>
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>

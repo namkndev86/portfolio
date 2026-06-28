@@ -9,16 +9,16 @@ This document defines the architecture, module structure, and data layer organiz
 * **Validation**: `class-validator` and `class-transformer` DTO pipe validations
 * **Documentation**: OpenAPI (Swagger) module generator (`@nestjs/swagger`)
 
+## Contract Synchronization & API Layer
+All NestJS modules, controllers, services, and DTOs in `src/modules/` are generated from and strictly synchronized with the OpenAPI contracts in `docs/contracts/` (`projects.md`, `profile.md`, `experience.md`, `contact.md`, `auth.md`) and the backend TODO roadmap in `docs/contracts/backend-todo.md`.
+
 ## Module Organization (`src/`)
 
 ```txt
 backend-api/src/
 ├── app.module.ts               # Root application module
 ├── main.ts                     # Application entry point (Port 5000, Global Pipes & Swagger)
-├── common/                     # Cross-cutting concerns
-│   ├── database/               # PrismaService, RedisService, Mongoose config
-│   ├── filters/                # Global exception filters
-│   └── guards/                 # JwtAuthGuard, RolesGuard
+├── core/                       # Platform core modules (auth, database, logging, exceptions, audit, events)
 ├── health/                     # Health check module (GET /health)
 └── modules/                    # Domain Feature Modules (Phase 1 Implementation Targets)
     ├── projects/               # ProjectsModule (ProjectsController, ProjectsService, DTOs)
@@ -26,19 +26,3 @@ backend-api/src/
     ├── experience/             # ExperienceModule (ExperienceController, ExperienceService, DTOs)
     └── contact/                # ContactModule (ContactController, ContactService, DTOs)
 ```
-
-## Data Layer & Prisma Schema (`prisma/schema.prisma`)
-The PostgreSQL relational schema provides structured storage for:
-- `User`: Admin credentials and role-based authorization (ADMIN, EDITOR, GUEST).
-- `Profile`: Dynamic bio narrative, social links, core philosophies.
-- `TimelineEvent` / `Experience`: Work and education chronological records.
-- `Project`: Case studies, categories (Enterprise, Fullstack, Frontend, Personal), tech stacks, responsibilities, challenges/solutions, architecture summaries, and lessons learned.
-- `ContactSubmission`: Inbound message storage with timestamps and status tracking.
-
-## REST API Versioning & Routing
-All business API endpoints are versioned with the prefix `/api/v1/`:
-- `GET /api/v1/projects` (with query filters `category` and `search`)
-- `GET /api/v1/projects/:slug`
-- `GET /api/v1/profile`
-- `GET /api/v1/experience`
-- `POST /api/v1/contact`

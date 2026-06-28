@@ -148,3 +148,5 @@ export const MOCK_PROJECTS: Project[] = [
     order: 4
   }
 ];
+
+export const PROJECTS_MOCK = MOCK_PROJECTS;
