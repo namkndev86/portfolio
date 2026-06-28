@@ -17,14 +17,15 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full border-t border-border bg-background text-muted-foreground py-12 transition-colors" suppressHydrationWarning>
+    <footer
+      className="w-full border-t border-border bg-background text-muted-foreground py-12 transition-colors"
+      suppressHydrationWarning
+    >
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12" suppressHydrationWarning>
           {/* Col 1: Bio / Brand */}
           <div className="md:col-span-2 space-y-4" suppressHydrationWarning>
-            <h3 className="text-foreground font-bold text-lg tracking-tight">
-              {SITE_CONFIG.name}
-            </h3>
+            <h3 className="text-foreground font-bold text-lg tracking-tight">{SITE_CONFIG.name}</h3>
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
               {SITE_CONFIG.bio}
             </p>
@@ -110,9 +111,14 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0" suppressHydrationWarning>
-          <p>© {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.</p>
-          <p className="flex items-center space-x-1">
+        <div
+          className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-4 sm:space-y-0"
+          suppressHydrationWarning
+        >
+          <p>
+            © {new Date().getFullYear()} {SITE_CONFIG.name}. All rights reserved.
+          </p>
+          <p className="flex items-center space-x-1 invisible">
             <span>Engineered with</span>
             <Heart className="h-3 w-3 text-red-500 inline fill-current" />
             <span>using Next.js App Router & TypeScript</span>

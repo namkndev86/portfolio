@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function ResumePage() {
   return (
-    <div className="py-12 sm:py-20 bg-slate-950 min-h-screen">
+    <div className="py-12 sm:py-20 bg-background min-h-screen text-foreground transition-colors">
       <Container>
         <ResumeViewer />
       </Container>
