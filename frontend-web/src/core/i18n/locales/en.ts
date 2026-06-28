@@ -20,7 +20,7 @@ export const enDictionary: TranslationDictionary = {
     contact: 'Contact',
   },
   pages: {
-    heroTitle: 'Software Architect & Fullstack Engineer',
+    heroTitle: 'Frontend Developer & Fullstack Developer',
     heroSubtitle: 'Building enterprise-grade distributed systems and modern web applications.',
     projectsTitle: 'Featured Projects',
     experienceTitle: 'Career Journey',
