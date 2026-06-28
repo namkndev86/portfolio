@@ -13,9 +13,18 @@ enum Role {
   GUEST
 }
 
-enum EventType {
-  WORK
-  EDUCATION
+enum ProjectCategory {
+  Enterprise
+  Fullstack
+  Frontend
+  Personal
+}
+
+enum EmploymentType {
+  FullTime   @map("Full-time")
+  PartTime   @map("Part-time")
+  Contract
+  Freelance
 }
 
 model User {
@@ -28,39 +37,73 @@ model User {
 }
 
 model Profile {
-  id          String   @id @default(uuid())
-  name        String
-  bio         String
-  email       String
-  githubUrl   String?
-  linkedinUrl String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                String   @id @default(uuid())
+  name              String
+  title             String
+  location          String
+  yearsOfExperience Int      @default(8)
+  shortIntroduction String
+  fullBio           String
+  coreValues        Json?
+  education         Json?
+  skills            Json?
+  email             String
+  githubUrl         String?
+  linkedinUrl       String?
+  twitterUrl        String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
 }
 
-model TimelineEvent {
-  id          String    @id @default(uuid())
-  type        EventType @default(WORK)
-  title       String
-  company     String
-  description String
-  startDate   DateTime
-  endDate     DateTime?
-  skills      String[]
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+model Experience {
+  id               String         @id @default(uuid())
+  company          String
+  companyUrl       String?
+  logoUrl          String?
+  location         String
+  position         String
+  employmentType   EmploymentType @default(FullTime)
+  startDate        String
+  endDate          String         @default("Present")
+  current          Boolean        @default(false)
+  description      String
+  achievements     String[]
+  technologiesUsed String[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
 }
 
 model Project {
-  id          String   @id @default(uuid())
-  title       String
-  slug        String   @unique
-  description String
-  content     String   // MDX/Markdown case study
-  githubUrl   String?
-  liveUrl     String?
-  tags        String[]
-  published   Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                     String          @id @default(uuid())
+  slug                   String          @unique
+  title                  String
+  tagline                String
+  description            String
+  category               ProjectCategory @default(Fullstack)
+  featured               Boolean         @default(false)
+  coverImage             String
+  galleryImages          String[]
+  techStack              String[]
+  role                   String
+  responsibilities       String[]
+  challengesAndSolutions Json?
+  architecture           Json?
+  lessonsLearned         String[]
+  liveDemoUrl            String?
+  githubUrl              String?
+  startDate              String
+  endDate                String          @default("Present")
+  order                  Int             @default(0)
+  createdAt              DateTime        @default(now())
+  updatedAt              DateTime        @updatedAt
+}
+
+model ContactSubmission {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("NEW")
+  createdAt DateTime @default(now())
 }

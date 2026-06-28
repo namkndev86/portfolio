@@ -125,3 +125,158 @@ A phase is considered complete only when all affected services are completed:
 Do not mark a phase as completed when only one service has been implemented.
 
 Each phase must be synchronized across all services.
+
+# Integration & Phase Completion Rules
+
+## Service Completion vs Phase Completion
+
+Completing implementation in individual services does not mean a phase is complete.
+
+A phase must progress through the following stages:
+
+### 1. Service Implementation Complete
+
+All affected services for the phase have completed their individual implementation:
+
+- frontend-web
+- backend-api
+- infra
+- docs
+
+At this stage, services may still be isolated and not yet connected.
+
+Valid status:
+
+- SERVICE IMPLEMENTATION COMPLETE
+
+---
+
+### 2. Integration Complete
+
+All affected services must be integrated and functioning together.
+
+Requirements:
+
+- Frontend is connected to backend APIs.
+- Backend is connected to required databases.
+- Backend is connected to required external services.
+- Shared API contracts are validated.
+- Authentication and authorization flows work end-to-end.
+- Environment variables are documented and configured.
+- Docker Compose environment starts successfully.
+- Core business flows work across service boundaries.
+- No required feature relies on mock data.
+
+Valid statuses:
+
+- READY FOR INTEGRATION
+- INTEGRATION IN PROGRESS
+- INTEGRATION COMPLETE
+
+---
+
+### 3. Verification Complete
+
+Integrated functionality must be verified.
+
+Requirements:
+
+- Smoke tests pass.
+- Critical user journeys are manually validated.
+- Documentation is updated.
+- Memory files are updated.
+- Session logs are created.
+- No blocking issues remain.
+
+Valid status:
+
+- READY FOR VERIFICATION
+
+---
+
+## Phase Completion Criteria
+
+A phase may only be marked as:
+
+PHASE COMPLETED
+
+when:
+
+- Service Implementation Complete
+- Integration Complete
+- Verification Complete
+
+have all been satisfied.
+
+Never mark a phase as completed if any requirement from these stages is missing.
+
+---
+
+## Mock Data Rule
+
+Mock data is allowed during development.
+
+However:
+
+- Mock APIs must be clearly identified.
+- Mock implementations must be isolated from production integrations.
+- Mock data may only be used during service implementation.
+- Mock integrations must be replaced by real integrations before phase completion.
+
+Allowed statuses:
+
+- UI COMPLETE
+- FRONTEND COMPLETE
+- SERVICE IMPLEMENTATION COMPLETE
+
+Not allowed:
+
+- INTEGRATION COMPLETE
+- PHASE COMPLETED
+
+A phase cannot be completed while any required feature still depends on mock data.
+
+---
+
+## Phase Synchronization Rule
+
+A phase is considered complete only when all affected services are synchronized:
+
+- frontend-web
+- backend-api
+- infra
+- docs
+
+Synchronization includes:
+
+- implementation
+- integration
+- verification
+- documentation
+- memory updates
+
+Partial completion of a single service does not constitute phase completion.
+
+---
+
+## Agent Enforcement Rule
+
+The agent must never report:
+
+- "Phase Complete"
+- "Phase Finished"
+- "Phase Delivered"
+
+unless all implementation, integration, verification, documentation, and memory requirements have been satisfied.
+
+If implementation is finished but integration has not started:
+
+Status = READY FOR INTEGRATION
+
+If integration is finished but verification has not started:
+
+Status = READY FOR VERIFICATION
+
+Only after successful verification:
+
+Status = PHASE COMPLETED
