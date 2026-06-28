@@ -345,3 +345,69 @@ Implementation plans belong in docs/implementation-plans/.
 Technical walkthroughs belong in docs/walkthroughs/.
 
 The agent must automatically create or update these files whenever a task introduces new architecture, implementation strategy, or feature behavior.
+
+## Frontend Backend Synchronization Rule
+
+This project contains:
+
+- frontend-web
+- backend-api
+
+They must evolve together.
+
+Before implementing any frontend feature that requires data:
+
+1. Check whether a backend contract exists.
+
+2. If the backend implementation does not exist:
+   - Create or update API contract documentation.
+   - Create Backend TODO specification.
+   - Create DTO definitions.
+   - Create endpoint specification.
+   - Create mock implementation.
+
+3. Frontend must never invent undocumented APIs.
+
+4. Every frontend API consumer must have:
+   - Endpoint definition
+   - Request DTO
+   - Response DTO
+   - Error response contract
+
+5. During architecture planning:
+
+   The agent must update BOTH:
+   - frontend-web/.ai-memory
+   - backend-api/.ai-memory
+
+   whenever an API contract changes.
+
+6. If a frontend page introduces new data requirements:
+
+   The agent must also generate:
+   - backend module plan
+   - controller plan
+   - service plan
+   - DTO plan
+
+   even if backend coding is deferred.
+
+7. Architecture reviews must verify:
+   - FE routes
+   - FE queries
+   - API contracts
+   - BE modules
+
+   remain synchronized.
+
+Frontend and Backend are considered a single platform.
+
+A feature is not architecturally complete until both sides are aligned.
+
+API contracts are the source of truth.
+
+Frontend must generate consumers from contracts.
+
+Backend must generate DTOs and endpoints from contracts.
+
+Neither frontend nor backend may introduce API changes without updating contracts first.
