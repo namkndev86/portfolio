@@ -29,7 +29,7 @@ export default function AboutPage() {
   const skillCategories = Array.from(new Set(MOCK_SKILLS.map((s) => s.category)));
 
   return (
-    <div className="py-16 sm:py-24 bg-slate-950 min-h-screen">
+    <div className="py-16 sm:py-24 bg-background min-h-screen text-foreground transition-colors">
       <Container>
         {/* Header */}
         <SectionHeader
@@ -40,8 +40,8 @@ export default function AboutPage() {
 
         {/* Personal Introduction & Bio */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
-          <FadeIn className="lg:col-span-2 space-y-6 text-slate-300 leading-relaxed text-base sm:text-lg">
-            <h3 className="text-2xl font-bold text-white tracking-tight">
+          <FadeIn className="lg:col-span-2 space-y-6 text-muted-foreground leading-relaxed text-base sm:text-lg">
+            <h3 className="text-2xl font-bold text-foreground tracking-tight">
               Building Scalable Enterprise Web Platforms
             </h3>
             {BIO_DATA.fullBio.split('\n\n').map((paragraph, idx) => (
@@ -50,35 +50,35 @@ export default function AboutPage() {
           </FadeIn>
 
           <FadeIn delay={0.2} className="space-y-6">
-            <Card className="border-indigo-500/30 bg-slate-900/80">
+            <Card className="border-primary/20 bg-card">
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Award className="h-5 w-5 text-indigo-400" />
+                  <Award className="h-5 w-5 text-primary" />
                   Key Achievements
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3 text-sm text-slate-300">
+              <CardContent className="space-y-3 text-sm text-muted-foreground">
                 {BIO_DATA.keyAchievements.map((achievement, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle className="h-4 w-4 text-emerald-400 mt-0.5 shrink-0" />
-                    <span>{achievement}</span>
+                    <CheckCircle className="h-4 w-4 text-emerald-500 mt-0.5 shrink-0" />
+                    <span className="text-foreground">{achievement}</span>
                   </div>
                 ))}
               </CardContent>
             </Card>
 
-            <Card className="border-slate-800">
+            <Card>
               <CardHeader>
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <BookOpen className="h-5 w-5 text-purple-400" />
+                  <BookOpen className="h-5 w-5 text-purple-500" />
                   Education & Foundation
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2 text-sm text-slate-300">
+              <CardContent className="space-y-2 text-sm">
                 {BIO_DATA.education.map((edu, idx) => (
                   <div key={idx}>
-                    <p className="font-semibold text-white">{edu.degree}</p>
-                    <p className="text-xs text-slate-400">
+                    <p className="font-semibold text-foreground">{edu.degree}</p>
+                    <p className="text-xs text-muted-foreground">
                       {edu.institution} • {edu.year}
                     </p>
                   </div>
@@ -106,15 +106,15 @@ export default function AboutPage() {
               ];
               return (
                 <StaggerItem key={idx}>
-                  <Card className="h-full hover:border-indigo-500/40 transition-colors">
+                  <Card className="h-full hover:border-primary/40 transition-colors">
                     <CardHeader>
-                      <div className="h-10 w-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-2">
+                      <div className="h-10 w-10 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-2">
                         {icons[idx % icons.length]}
                       </div>
                       <CardTitle className="text-xl">{value.title}</CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <p className="text-sm text-slate-400 leading-relaxed">{value.description}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{value.description}</p>
                     </CardContent>
                   </Card>
                 </StaggerItem>
@@ -138,20 +138,20 @@ export default function AboutPage() {
               return (
                 <FadeIn
                   key={category}
-                  className="rounded-2xl border border-slate-800/80 bg-slate-900/40 p-6 sm:p-8"
+                  className="rounded-2xl border border-border bg-card p-6 sm:p-8 shadow-sm"
                 >
-                  <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                    <span className="h-2 w-2 rounded-full bg-indigo-500" />
+                  <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                    <span className="h-2 w-2 rounded-full bg-primary" />
                     {category}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     {skillsInCategory.map((skill) => (
                       <div
                         key={skill.id}
-                        className="flex items-center justify-between p-3.5 rounded-xl bg-slate-950/70 border border-slate-800 hover:border-slate-700 transition-colors"
+                        className="flex items-center justify-between p-3.5 rounded-xl bg-muted/40 border border-border hover:border-primary/40 transition-colors"
                       >
                         <div className="flex items-center space-x-3">
-                          <span className="text-sm font-semibold text-slate-200">{skill.name}</span>
+                          <span className="text-sm font-semibold text-foreground">{skill.name}</span>
                         </div>
                         <Badge variant={skill.featured ? 'default' : 'secondary'}>
                           {skill.proficiency}%
