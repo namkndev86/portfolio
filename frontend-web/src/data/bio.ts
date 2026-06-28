@@ -1,33 +1,62 @@
 export const BIO_DATA = {
-  name: 'Nam K. Nguyen',
-  title: 'Senior Software Architect & Fullstack Engineer',
-  location: 'Ho Chi Minh City, Vietnam',
-  yearsOfExperience: 8,
-  shortIntroduction: 'I construct high-throughput digital systems, resilient microservices architectures, and fluid modern web platforms with uncompromising code quality.',
-  fullBio: `With over 8 years of experience building software at scale, I specialize in transforming complex technical problems into elegant, maintainable, and highly efficient systems. 
+  name: 'NGUYEN KHAC NAM',
+  title: 'Frontend Developer',
+  location: 'Hanoi, Vietnam',
+  yearsOfExperience: 3,
+  shortIntroduction:
+    'Frontend Developer with 3+ years of experience building enterprise-scale web applications using React and TypeScript.',
+  fullBio: `Frontend Developer with 3+ years of experience building enterprise-scale web applications using React and TypeScript. 
 
-My journey began in core frontend development, mastering the nuances of modern browser execution, rendering lifecycles, and user interface design. As systems grew, my focus expanded to backend microservices, distributed data pipelines, container orchestration, and system design architecture.
+Experienced in leading frontend development for business-critical modules, designing scalable architectures, building reusable component systems, and optimizing application performance. 
 
-I believe software engineering is an art of managing complexity—creating software that is resilient under pressure, intuitive for developers to build upon, and delightful for end users to experience.`,
+Passionate about creating maintainable software, driving engineering excellence, and collaborating across teams to deliver reliable solutions that solve complex business challenges.`,
   coreValues: [
     {
-      title: 'Architectural Elegance',
-      description: 'Designing systems with clean boundaries, high cohesion, and low coupling so they scale effortlessly with team growth.'
+      title: 'Scalable Frontend Architecture',
+      description:
+        'Designing component-driven architectures, feature-based modules, and robust state flows that scale cleanly across enterprise applications.',
     },
     {
-      title: 'Relentless Performance',
-      description: 'Optimizing critical execution paths from database indexing to 60fps browser animations.'
+      title: 'Performance & Optimization',
+      description:
+        'Optimizing high-frequency data rendering, virtualizing datasets exceeding 300k records, and streamlining bundle performance.',
     },
     {
-      title: 'Developer Empowerment',
-      description: 'Building tools, design systems, and automated pipelines that elevate engineering teams to do their best work.'
-    }
+      title: 'Engineering Excellence & Collaboration',
+      description:
+        'Driving sprint planning, pull request governance, reusable component systems, and effective cross-functional team collaboration.',
+    },
   ],
   education: [
     {
-      degree: 'Bachelor of Science in Computer Science',
-      institution: 'University of Information Technology',
-      year: '2013 - 2017'
-    }
-  ]
+      degree: "Engineer's Degree in Information Technology",
+      institution: 'Hanoi University of Mining and Geology',
+      year: '2019 – 2023',
+    },
+  ],
+  keyAchievements: [
+    'Led frontend development for MESCore & WMS-X modules managing a team of 5 engineers.',
+    'Optimized rendering for 300,000+ records via list virtualization and memoization.',
+    'Built 25+ reusable UI components shared across 6 enterprise modules.',
+  ],
+  sections: {
+    aboutHeader: {
+      badge: 'Background & Expertise',
+      title: 'About NGUYEN KHAC NAM',
+      subtitle:
+        'Building enterprise-scale web applications, modern component systems, and high-performance user interfaces.',
+    },
+    corePhilosophies: {
+      badge: 'Engineering Mindset',
+      title: 'Core Engineering Philosophies',
+      subtitle:
+        'The fundamental principles guiding frontend architecture, performance optimization, and team collaboration.',
+    },
+    technologyMatrix: {
+      badge: 'Technology Matrix',
+      title: 'Skills & Core Competencies',
+      subtitle:
+        'A comprehensive breakdown of technologies, frameworks, and methodologies mastered across 3+ years.',
+    },
+  },
 };
