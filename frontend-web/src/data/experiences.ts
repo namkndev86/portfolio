@@ -56,3 +56,5 @@ export const MOCK_EXPERIENCES: Experience[] = [
     technologiesUsed: ['JavaScript (ES6+)', 'React', 'Redux', 'Sass', 'Webpack', 'REST APIs']
   }
 ];
+
+export const EXPERIENCES_DATA = MOCK_EXPERIENCES;

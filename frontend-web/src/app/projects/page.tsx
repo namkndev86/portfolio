@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import { ProjectsCatalog } from '@/features/projects/ProjectsCatalog';
-import { MOCK_PROJECTS } from '@/data/projects';
 import { SITE_CONFIG } from '@/lib/constants';
 
 export const metadata: Metadata = {
@@ -10,8 +9,8 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="py-16 sm:py-24 bg-slate-950 min-h-screen">
-      <ProjectsCatalog initialProjects={MOCK_PROJECTS} />
+    <div className="py-16 sm:py-24 bg-background min-h-screen text-foreground transition-colors">
+      <ProjectsCatalog />
     </div>
   );
 }
