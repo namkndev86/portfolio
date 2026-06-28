@@ -1,31 +1,55 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from '@/core/i18n/i18n-context';
 import { SupportedLocale } from '@/core/i18n/types';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Globe } from 'lucide-react';
 
 export const LanguageToggle: React.FC = () => {
   const { locale, setLocale } = useTranslation();
+  const [mounted, setMounted] = useState(false);
 
-  const handleToggle = () => {
-    const locales: SupportedLocale[] = ['en', 'vi', 'ja'];
-    const nextIndex = (locales.indexOf(locale) + 1) % locales.length;
-    setLocale(locales[nextIndex]);
-  };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  const labels: Record<SupportedLocale, string> = {
-    en: '🇺🇸 EN',
-    vi: '🇻🇳 VI',
-    ja: '🇯🇵 JA',
-  };
+  if (!mounted) {
+    return (
+      <div className="w-[100px] h-8 rounded-lg border border-input bg-transparent opacity-0" />
+    );
+  }
+
+  const options: { value: SupportedLocale; label: string; flag: string }[] = [
+    { value: 'en', label: 'EN', flag: '🇺🇸' },
+    { value: 'vi', label: 'VI', flag: '🇻🇳' },
+    { value: 'ja', label: 'JA', flag: '🇯🇵' },
+  ];
 
   return (
-    <button
-      onClick={handleToggle}
-      className="px-2.5 py-1.5 rounded-md border border-slate-700 bg-slate-900/80 text-xs font-semibold text-slate-200 hover:bg-slate-800 hover:text-white transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500"
-      aria-label="Switch language"
-    >
-      {labels[locale]}
-    </button>
+    <Select value={locale} onValueChange={(val) => setLocale(val as SupportedLocale)}>
+      <SelectTrigger
+        size="sm"
+        className="w-[100px] text-xs font-medium"
+        aria-label="Switch language"
+      >
+        <Globe className="h-3.5 w-3.5 text-indigo-400 mr-1 shrink-0" />
+        <SelectValue placeholder="Language" />
+      </SelectTrigger>
+      <SelectContent align="end">
+        {options.map((opt) => (
+          <SelectItem key={opt.value} value={opt.value}>
+            <span className="mr-1.5">{opt.flag}</span>
+            <span>{opt.label}</span>
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };
