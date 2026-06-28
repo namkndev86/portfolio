@@ -36,7 +36,7 @@ export function Navbar() {
               <Terminal className="h-5 w-5" />
             </div>
             <span>
-              {SITE_CONFIG.name.split(' ')[0]}
+              {SITE_CONFIG.brandName}
               <span className="text-indigo-400">.dev</span>
             </span>
           </Link>

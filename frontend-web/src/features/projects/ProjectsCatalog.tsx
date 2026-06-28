@@ -12,7 +12,13 @@ import { StaggerContainer, StaggerItem } from '@/components/animations/MotionCom
 import { useProjectsQuery } from '@/hooks/queries/useProjectsQuery';
 import { useTranslation } from '@/core/i18n/i18n-context';
 
-const CATEGORIES: (ProjectCategory | 'All')[] = ['All', 'Enterprise', 'Fullstack', 'Frontend', 'Personal'];
+const CATEGORIES: (ProjectCategory | 'All')[] = [
+  'All',
+  'Enterprise',
+  'Fullstack',
+  'Frontend',
+  'Personal',
+];
 
 export function ProjectsCatalog() {
   const { data: projects = [] } = useProjectsQuery();
@@ -26,7 +32,9 @@ export function ProjectsCatalog() {
     const matchesSearch =
       project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       project.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      project.techStack.some((tech: string) => tech.toLowerCase().includes(searchQuery.toLowerCase()));
+      project.techStack.some((tech: string) =>
+        tech.toLowerCase().includes(searchQuery.toLowerCase()),
+      );
 
     return matchesCategory && matchesSearch;
   });
@@ -83,7 +91,8 @@ export function ProjectsCatalog() {
           <Layers className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-xl font-bold text-foreground mb-2">No Projects Found</h3>
           <p className="text-sm text-muted-foreground max-w-md mx-auto mb-6">
-            We couldn&apos;t find any projects matching &quot;{searchQuery}&quot; in the {selectedCategory} category.
+            We couldn&apos;t find any projects matching &quot;{searchQuery}&quot; in the{' '}
+            {selectedCategory} category.
           </p>
           <Button
             variant="outline"

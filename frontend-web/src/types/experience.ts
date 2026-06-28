@@ -5,7 +5,7 @@ export interface Experience {
   logoUrl?: string;
   location: string;
   position: string;
-  employmentType: 'Full-time' | 'Part-time' | 'Contract' | 'Freelance';
+  employmentType: 'Full-time' | 'Part-time' | 'Contract' | 'Freelance' | 'Internship';
   startDate: string;
   endDate: string | 'Present';
   current: boolean;
