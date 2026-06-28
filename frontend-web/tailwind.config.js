@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,9 +11,23 @@ module.exports = {
     extend: {
       colors: {
         background: {
+          DEFAULT: "var(--bg-primary)",
           primary: "var(--bg-primary)",
           secondary: "var(--bg-secondary)",
           card: "var(--bg-card)",
+        },
+        foreground: "var(--text-main)",
+        card: {
+          DEFAULT: "var(--bg-card)",
+          foreground: "var(--text-main)",
+        },
+        muted: {
+          DEFAULT: "var(--bg-secondary)",
+          foreground: "var(--text-muted)",
+        },
+        accent: {
+          DEFAULT: "var(--bg-secondary)",
+          foreground: "var(--text-main)",
         },
         primary: {
           DEFAULT: "var(--color-primary)",
@@ -36,6 +51,7 @@ module.exports = {
           light: "var(--text-light)",
         },
         border: {
+          DEFAULT: "var(--border-color)",
           color: "var(--border-color)",
           focus: "var(--border-focus)",
         }
