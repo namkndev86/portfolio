@@ -339,3 +339,9 @@ A phase is not completed until:
 - Memory files are updated
 
 Only after all requirements are satisfied may the project move to the next phase.
+
+Implementation plans belong in docs/implementation-plans/.
+
+Technical walkthroughs belong in docs/walkthroughs/.
+
+The agent must automatically create or update these files whenever a task introduces new architecture, implementation strategy, or feature behavior.
